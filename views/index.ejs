@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Prices</title>
+</head>
+<body>
+    <h1>Stock prices: <%= tickerSymbol %></h1>
+    <table id="stocks-table">
+        <tr>
+          <th>Date</th>
+          <th>close</th>
+          <th>RSI</th>
+          <th>Cash</th>
+          <th>Stock Quantity</th>
+          <th>Stock Equity</th>
+          <th>Buy Count</th>
+          <th>Sell Count</th>
+        </tr>
+        <% for (let i=0; i<arraySimulatedDailyAction.length; i++){ %>
+          <tr>
+            <td><%= arraySimulatedDailyAction[i].date %></td>
+            <td><%= arraySimulatedDailyAction[i].close %></td>
+            <td><%= arraySimulatedDailyAction[i].rsi %></td>
+            <td><%= arraySimulatedDailyAction[i].cash %></td>
+            <td><%= arraySimulatedDailyAction[i].qtyStock %></td>
+            <td><%= arraySimulatedDailyAction[i].equityInStock %></td>
+            <td><%= arraySimulatedDailyAction[i].buysCount %></td>
+            <td><%= arraySimulatedDailyAction[i].sellsCount %></td>
+          </tr>
+      <% } %>
+      </table> 
+
+      <br>
+      <button id="btn">click me</button>
+      <script src="../js/scripts.js"></script>
+</body>
+</html>
