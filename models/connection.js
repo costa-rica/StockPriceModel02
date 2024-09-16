@@ -1,4 +1,5 @@
-const config = require('../server');
+// connection.js
+const config = require('../config');
 const mongoose = require('mongoose');
 const connectionStringBase = `mongodb+srv://${config.MONGODB_USER}:${config.MONGODB_CLUSTER_PW}@cluster0.8puct.mongodb.net/`
 const dbName = 'StockPricesModel'

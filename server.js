@@ -1,13 +1,14 @@
-// It seems this needs to be up here for the config object to get to the connnection.js
-require('dotenv').config();
-const config = {
-    PORT: process.env.PORT,
-    PROJECT_RESOURCES_DIR: process.env.PROJECT_RESOURCES_DIR,
-    MONGODB_CLUSTER_PW: process.env.MONGODB_CLUSTER_PW,
-};
-const PORT = config.PORT || 3000;
-module.exports = config;// needed for the config object
-
+// // It seems this needs to be up here for the config object to get to the connnection.js
+// require('dotenv').config();
+// const config = {
+//     PORT: process.env.PORT,
+//     PROJECT_RESOURCES_DIR: process.env.PROJECT_RESOURCES_DIR,
+//     MONGODB_CLUSTER_PW: process.env.MONGODB_CLUSTER_PW,
+// };
+// const PORT = config.PORT || 3000;
+// module.exports = config;// needed for the config object
+// server.js
+const config = require('./config');
 
 require('./models/connection');
 const stockPrice = require('./models/stockPrices')
@@ -40,6 +41,6 @@ app.get("/", (req,res)=>{
 
 
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(config.PORT, () => {
+  console.log(`Server is running on port ${config.PORT}`);
 });
