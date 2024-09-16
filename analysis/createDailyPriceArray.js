@@ -38,7 +38,7 @@ function createDailyPriceWithRsiArray(tickerSymbol) {
 }
 
 
-function simulateBuyAndSell(dailyPriceWithRSI, buyRsi, sellRsi, startCash) {
+function simulateBuyAndSell(dailyPriceWithRSI, buyRsi, sellRsi, startCash, startDate='9999') {
 
     // let cash = startCash
     // let qtyStock = 0
@@ -48,8 +48,18 @@ function simulateBuyAndSell(dailyPriceWithRSI, buyRsi, sellRsi, startCash) {
     let sellsCount = 0
 
     console.log(`length: ${dailyPriceWithRSI.length}`)
-
-
+    if (startDate != '9999'){
+        console.log(`removing dates prior to: ${startDate}`)
+        for (let i=0;i<dailyPriceWithRSI.length;i++){
+            if (dailyPriceWithRSI[i].date >= Date.parse(startDate)){
+                // console.log(`BREAKINg at : ${dailyPriceWithRSI[i].date}`)
+                dailyPriceWithRSI = dailyPriceWithRSI.splice(i)
+                break
+            }
+        }
+    }
+    console.log(`length (afgter): ${dailyPriceWithRSI.length}`)
+    
     for (let i = 0; i < dailyPriceWithRSI.length; i++) {
         
         let dailySimulationObject = {}

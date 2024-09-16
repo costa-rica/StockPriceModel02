@@ -13,6 +13,7 @@ To get started with this project, follow these steps:
    - `PROJECT_RESOURCES_DIR`: the path to the directory containing project resources
    - `MONGODB_CLUSTER_PW`: the password for the MongoDB cluster (if applicable)
 4. Start the application by running `npm start`.
+   - run with nodemon (refreshing server): `npm run nodemon_start`
 5. Open your browser and navigate to `http://localhost:3000` to view the application.
 
 ## Usage
