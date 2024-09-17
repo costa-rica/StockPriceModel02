@@ -1,27 +1,17 @@
-
 const config = require('./config');
 require('./models/connection');
 const stockPrice = require('./models/stockPrices')
 const apiFetchStockData = require('./analysis/apiFetchPrices');
 const {createDailyPriceWithRsiArray,simulateBuyAndSell} = require('./analysis/createDailyPriceArray');
-console.log("- c'est parti! dans server.js -")
 
 // To make server
 const express = require('express')
 const app = express()
-// app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 const path = require('path');
-
 // // // Serve static files from the 'public' directory
 // // app.use(express.static(path.join(__dirname, 'public')));
-// // Middleware to serve static files
-// app.use(express.static('public'))
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Setup view engine as EJS
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.use(express.static('public'))
 
 
 app.get("/", (req,res)=>{
