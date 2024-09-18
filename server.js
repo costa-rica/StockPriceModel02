@@ -13,30 +13,44 @@ const path = require('path');
 // // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public'))
 
+// To get form data from HTML/frontend
+//app.use(express.json()); // Used to parse JSON bodies
+app.use(express.urlencoded()); //Parse URL-encoded bodies
 
-app.route("/").get( (req, res) => {
-        const tickerSymbol = "BOIL"
-        createDailyPriceWithRsiArray(tickerSymbol).then(arryStock => {
-
-            const arraySimulatedDailyAction = simulateBuyAndSell(arryStock, 30, 70, 10000, "2019-01-01")
-
-            // Format date and RSI
-            for (let elem of arraySimulatedDailyAction) {
-                elem.date = elem.date.toISOString().split('T')[0]
-                elem.rsi = Math.round(elem.rsi * 100) / 100
-                elem.cash = Math.round(elem.cash * 100) / 100
-            }
-            const options = { arraySimulatedDailyAction: arraySimulatedDailyAction, tickerSymbol: tickerSymbol }
-            res.render("index", options);
-        })
+app.route("/")
+    .get(simulationArray, (req, res) => {
+        console.log("- in GET / route -")
+        simulationOptions = res.locals.simulationOptions
+        console.log(Object.keys(simulationOptions))
+        res.render("index", simulationOptions)
     })
-    .post((req,res)=>{
-        console.log("- post")
-        console.log(`req: ${req}`)
-        res.render("index", options);
+    .post(simulationArray, (req, res) => {
+        console.log("- in POST / route -")
+        console.log(`Object.keys(req.body): ${Object.keys(req.body)}`)
+        console.log(`date selected: ${req.body["inputDate-Nick"]}`)
+        console.log(`date selected: ${req.body.date}`)
+        simulationOptions = res.locals.simulationOptions
+        res.render("index", simulationOptions);
     });
 
+function simulationArray(req, res, next) {
+    const tickerSymbol = "BOIL"
+    createDailyPriceWithRsiArray(tickerSymbol).then(arryStock => {
 
+        const arraySimulatedDailyAction = simulateBuyAndSell(arryStock, 30, 70, 10000, "2019-01-01")
+
+        // Format date and RSI
+        for (let elem of arraySimulatedDailyAction) {
+            elem.date = elem.date.toISOString().split('T')[0]
+            elem.rsi = Math.round(elem.rsi * 100) / 100
+            elem.cash = Math.round(elem.cash * 100) / 100
+        }
+        const options = { arraySimulatedDailyAction: arraySimulatedDailyAction, tickerSymbol: tickerSymbol }
+        // res.render("index", options);
+        res.locals.simulationOptions = options
+        next()
+    })
+}
 
 
 app.listen(config.PORT, () => {
