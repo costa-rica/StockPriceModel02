@@ -2,28 +2,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
 * {
-    background-color: gray;
     margin:0;
     padding:0;
     font-family: "Ubuntu";
     box-sizing: border-box;
 }
+body{
+    background-color: gray;
+}
 .div-super-table{
     width: 100%;
     display: flex;
-    /* background-color: blue; */
+
     justify-content: center;
 }
+
 #stocks-table {
-    background-color: aqua;
-    tr{
-        background-color: purple;
-        td{
-            /* background-color: red; */
-        }
+    background-color: rgb(100, 100, 100);
+}
+
+table{
+    tr {
+        /* background-color: green; */
+        th{
+            border: 1px red dashed;
+        };
+        td {
+            text-align: center; /* Centers the content horizontally */
+          }
     }
 }
 
-#stocks-table > tr > td {
-    background-color: aquamarine;
-}
+/* table > tr {
+    background-color: aqua;
+} */
